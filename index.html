@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Salu & Salman's Wedding Guest Hub</title>
+  <!-- SEO & Meta Tags -->
+  <meta name="description" content="Manage and track Salu & Salman's wedding guest list, Saturday/Sunday headcounts, VIP status, and real-time invitations.">
+  <meta name="theme-color" content="#121212" id="theme-color-meta">
+  
+  <!-- iOS Mobile Web App Settings -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Salu & Salman">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- Backdrop Gradients -->
+  <div class="bg-gradient-glow"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-content">
+        <div class="logo-area">
+          <span class="wedding-ampersand">&amp;</span>
+          <h1 class="wedding-title">Salu <span class="accent-serif">&amp;</span> Salman</h1>
+          <p class="wedding-subtitle">Wedding Guest Hub</p>
+        </div>
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle visual theme" title="Toggle theme">
+          <!-- Dark Icon (Moon) -->
+          <svg class="icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <!-- Light Icon (Sun) -->
+          <svg class="icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Dashboard & Content -->
+    <main class="app-main">
+      
+      <!-- Live Dashboard Section -->
+      <section class="dashboard-section" aria-labelledby="dashboard-title">
+        <div class="section-header">
+          <h2 id="dashboard-title" class="section-title">Live Dashboard</h2>
+          <div id="sync-status" class="sync-indicator synced">
+            <span class="status-dot"></span>
+            <span id="sync-status-text" class="status-text">Synced</span>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <!-- Total Invitations Sent Card -->
+          <div class="stat-card double-width" id="card-invitations">
+            <div class="stat-icon-wrapper">
+              <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <div class="stat-data">
+              <span class="stat-label">Invitations Sent vs. Pending</span>
+              <div class="stat-value-row">
+                <div class="stat-main-number"><span id="stat-sent" class="ticker">0</span> <span class="stat-denom">/ 3200</span></div>
+                <div class="stat-percentage" id="stat-percentage-badge">0%</div>
+              </div>
+              <!-- Custom Elegant Progress Bar -->
+              <div class="progress-bar-container">
+                <div id="stat-progress-fill" class="progress-bar-fill" style="width: 0%"></div>
+              </div>
+              <div class="stat-details-row">
+                <span class="detail-item"><strong id="detail-sent-count">0</strong> Sent</span>
+                <span class="detail-item"><strong id="detail-pending-count">3200</strong> Pending</span>
+              </div>
+            </div>
+            <!-- Card Skeleton Loader -->
+            <div class="skeleton-overlay">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-number"></div>
+              <div class="skeleton skeleton-bar"></div>
+            </div>
+          </div>
+
+          <!-- Saturday Headcount -->
+          <div class="stat-card" id="card-saturday">
+            <div class="stat-icon-wrapper sat-icon-color">
+              <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </div>
+            <div class="stat-data">
+              <span class="stat-label">Saturday Headcount</span>
+              <span id="stat-saturday" class="stat-number ticker">0</span>
+              <span class="stat-subtext">Est. Guests</span>
+            </div>
+            <div class="skeleton-overlay">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-number"></div>
+              <div class="skeleton skeleton-subtext"></div>
+            </div>
+          </div>
+
+          <!-- Sunday Headcount -->
+          <div class="stat-card" id="card-sunday">
+            <div class="stat-icon-wrapper sun-icon-color">
+              <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </div>
+            <div class="stat-data">
+              <span class="stat-label">Sunday Headcount</span>
+              <span id="stat-sunday" class="stat-number ticker">0</span>
+              <span class="stat-subtext">Est. Guests</span>
+            </div>
+            <div class="skeleton-overlay">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-number"></div>
+              <div class="skeleton skeleton-subtext"></div>
+            </div>
+          </div>
+
+          <!-- Total VIPs -->
+          <div class="stat-card double-width" id="card-vips">
+            <div class="stat-icon-wrapper vip-icon-color">
+              <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <div class="stat-data">
+              <span class="stat-label">Total VIP Guests</span>
+              <span id="stat-vips" class="stat-number ticker">0</span>
+              <span class="stat-subtext">Special Attention Flagged</span>
+            </div>
+            <div class="skeleton-overlay">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-number"></div>
+              <div class="skeleton skeleton-subtext"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- New Guest Form Section -->
+      <section class="form-section" aria-labelledby="form-title">
+        <h2 id="form-title" class="section-title">New Guest Registry</h2>
+        <div class="form-card">
+          <form id="guest-form" novalidate>
+            <!-- Guest / Family Head Name -->
+            <div class="form-group floating-input-group">
+              <input type="text" id="guest-name" name="name" class="form-control" placeholder=" " required autocomplete="off">
+              <label for="guest-name" class="floating-label">Guest / Family Head Name *</label>
+              <div class="validation-message" id="name-error">Please enter the guest's name</div>
+            </div>
+
+            <!-- Category Dropdown -->
+            <div class="form-group select-group">
+              <label for="guest-category" class="field-label">Category *</label>
+              <div class="custom-select-wrapper">
+                <select id="guest-category" name="category" class="form-control select-control" required>
+                  <option value="" disabled selected>Select category...</option>
+                  <option value="MY Professional Network">MY Professional Network</option>
+                  <option value="UMMA family">UMMA family</option>
+                  <option value="VAPPICHI Family">VAPPICHI Family</option>
+                  <option value="CLOSE family">CLOSE family</option>
+                  <option value="onampilly Neighbors">onampilly Neighbors</option>
+                  <option value="ponjassery neighbours">ponjassery neighbours</option>
+                  <option value="kootamveli family">kootamveli family</option>
+                  <option value="aami's Friends">aami's Friends</option>
+                  <option value="salu's friends">salu's friends</option>
+                  <option value="ammar's friends">ammar's friends</option>
+                </select>
+                <div class="select-arrow"></div>
+              </div>
+              <div class="validation-message" id="category-error">Please select a category</div>
+            </div>
+
+            <!-- Adults / Est. Headcount (Number Input + Steppers) -->
+            <div class="form-group stepper-group">
+              <label class="field-label">Adults / Est. Headcount *</label>
+              <div class="stepper-wrapper">
+                <button type="button" class="stepper-btn btn-minus" id="btn-headcount-minus" aria-label="Decrease headcount">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+                <input type="number" id="guest-headcount" name="adults" class="form-control headcount-input" value="1" min="1" max="50" required>
+                <button type="button" class="stepper-btn btn-plus" id="btn-headcount-plus" aria-label="Increase headcount">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+              </div>
+              <div class="validation-message" id="headcount-error">Headcount must be at least 1</div>
+            </div>
+
+            <!-- Event Selection (Dropdown) -->
+            <div class="form-group select-group">
+              <label for="guest-event" class="field-label">Event Selection *</label>
+              <div class="custom-select-wrapper">
+                <select id="guest-event" name="event" class="form-control select-control" required>
+                  <option value="" disabled selected>Select event attendance...</option>
+                  <option value="SATURDAY">SATURDAY (Nikah/Rehearsal)</option>
+                  <option value="SUNDAY">SUNDAY (Reception/Main Event)</option>
+                  <option value="BOTH">BOTH (Full Wedding Weekend)</option>
+                </select>
+                <div class="select-arrow"></div>
+              </div>
+              <div class="validation-message" id="event-error">Please select an event option</div>
+            </div>
+
+            <!-- iOS Toggles Container -->
+            <div class="toggles-grid">
+              <!-- Invitation Sent Toggle -->
+              <div class="toggle-card">
+                <div class="toggle-info">
+                  <span class="toggle-title">Invitation Sent</span>
+                  <span class="toggle-desc" id="invitation-desc-label">Has the invite been sent out?</span>
+                </div>
+                <label class="ios-switch">
+                  <input type="checkbox" id="guest-invitation" name="invitation">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <!-- VIP Status Toggle -->
+              <div class="toggle-card">
+                <div class="toggle-info">
+                  <span class="toggle-title">VIP Status</span>
+                  <span class="toggle-desc" id="vip-desc-label">Special guest / seating priority</span>
+                </div>
+                <label class="ios-switch">
+                  <input type="checkbox" id="guest-vip" name="vip">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Grid for Additional Settings -->
+            <div class="form-row-grid">
+              <!-- Probability of Attendance -->
+              <div class="form-group select-group">
+                <label for="guest-probability" class="field-label">Probability of Attendance (Optional)</label>
+                <div class="custom-select-wrapper">
+                  <select id="guest-probability" name="probability" class="form-control select-control">
+                    <option value="" selected>Choose probability...</option>
+                    <option value="HIGH">HIGH (Confirmed / Direct family)</option>
+                    <option value="MEDIUM">MEDIUM (Likely to attend)</option>
+                    <option value="LOW">LOW (Unlikely / Regrets sent)</option>
+                  </select>
+                  <div class="select-arrow"></div>
+                </div>
+              </div>
+
+              <!-- Dietary Preferences -->
+              <div class="form-group select-group">
+                <label for="guest-dietary" class="field-label">Dietary Preferences</label>
+                <div class="custom-select-wrapper">
+                  <select id="guest-dietary" name="dietary" class="form-control select-control">
+                    <option value="Non-Veg" selected>Non-Veg (Standard Menu)</option>
+                    <option value="Veg">Veg (Vegetarian Menu)</option>
+                    <option value="Allergies">Allergies (Requires attention)</option>
+                  </select>
+                  <div class="select-arrow"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Number -->
+            <div class="form-group floating-input-group">
+              <input type="tel" id="guest-contact" name="contact" class="form-control" placeholder=" " autocomplete="off">
+              <label for="guest-contact" class="floating-label">Contact Number (Optional)</label>
+            </div>
+
+            <!-- Remarks / Seating -->
+            <div class="form-group floating-input-group">
+              <input type="text" id="guest-remarks" name="remarks" class="form-control" placeholder=" " autocomplete="off">
+              <label for="guest-remarks" class="floating-label">Remarks / Seating Preferences (Optional)</label>
+            </div>
+
+            <!-- Submit Button Area -->
+            <div class="form-submit-wrapper">
+              <button type="submit" id="submit-btn" class="submit-button">
+                <span class="btn-text">Register Guest</span>
+                <span class="btn-spinner"></span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>&copy; 2026 Salu &amp; Salman Wedding Registry</p>
+    </footer>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
