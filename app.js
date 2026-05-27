@@ -357,8 +357,8 @@ function resetRegistryForm() {
   remarksInput.value = '';
   
   // Reset toggles to default
-  invitationInput.checked = false;
-  vipInput.checked = true;
+  invitationInput.checked = true;
+  vipInput.checked = false;
   
   // Reset select boxes to placeholder
   dietaryInput.value = 'Non-Veg';
