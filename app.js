@@ -23,7 +23,8 @@ const vipInput = document.getElementById('guest-vip');
 const contactInput = document.getElementById('guest-contact');
 const remarksInput = document.getElementById('guest-remarks');
 const submitBtn = document.getElementById('submit-btn');
-
+const districtGroup = document.getElementById('district-group');
+const districtInput = document.getElementById('guest-district');
 // Stepper Buttons
 const btnMinus = document.getElementById('btn-headcount-minus');
 const btnPlus = document.getElementById('btn-headcount-plus');
@@ -275,6 +276,17 @@ function validateField(inputElement, errorElement) {
   });
 });
 
+// Toggle District dropdown based on category
+categoryInput.addEventListener('change', () => {
+  // If you also want this for your dad's contacts, you can use: 
+  // if (categoryInput.value === 'MY Professional Network' || categoryInput.value === 'VAPPICHI Family')
+  if (categoryInput.value === 'MY Professional Network') { 
+    districtGroup.style.display = 'block';
+  } else {
+    districtGroup.style.display = 'none';
+    districtInput.value = ''; // Reset if they change their mind
+  }
+});
 // ==========================================================================
 // Form Submission & POST logic
 // ==========================================================================
@@ -312,6 +324,7 @@ guestForm.addEventListener('submit', async (e) => {
     invitation: invitationInput.checked ? 'Yes' : 'No',
     contact: contactInput.value.trim() || "",
     remarks: remarksInput.value.trim() || "",
+    district: districtInput.value || "", // <-- Added this!
     sNo: ""
   };
   
@@ -366,6 +379,8 @@ function resetRegistryForm() {
   // Remove error classes
   document.querySelectorAll('.form-group').forEach(group => {
     group.classList.remove('has-error');
+    districtInput.value = '';
+    districtGroup.style.display = 'none';
   });
 }
 
